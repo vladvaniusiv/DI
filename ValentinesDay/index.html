@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>¿Quieres ser mi San Valentín? 💘</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffe6ec, #fff5f8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      width: 360px;
+      padding: 40px 30px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(255, 105, 135, 0.25);
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .heart {
+      font-size: 48px;
+      animation: beat 1.2s infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes beat {
+      0% { transform: scale(1); }
+      20% { transform: scale(1.2); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      color: #e63963;
+      margin: 10px 0;
+    }
+
+    p {
+      color: #d6336c;
+      margin-bottom: 25px;
+      min-height: 24px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      position: relative;
+    }
+
+    button {
+      padding: 12px 22px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.25s ease;
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #ff4d6d, #ff7aa2);
+      color: white;
+    }
+
+    #noBtn {
+      background: #fff0f3;
+      color: #e63963;
+      border: 2px solid #ffc2d1;
+      position: relative;
+    }
+
+    .final {
+      font-size: 18px;
+      color: #e63963;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Hola mi amor 💕</h1>
+    <p id="message">¿Quieres ser mi San Valentín?</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Sí 💖</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const message = document.getElementById("message");
+  const card = document.querySelector(".card");
+
+  const noMessages = [
+    "¿En serio? 🥺",
+    "No me amas… 💔",
+    "Eso me rompe el corazón 😭",
+    "Piénsalo otra vez, por favor 😢",
+    "¡Por favor, reconsidera! 🙏",
+    "¡No rompas mi corazón! 💘",
+    "¿Una oportunidad más? 🌹",
+    "No digas que no… 😭",
+    "¡No huyas de mis sentimientos! 💞",
+    "¡Dame una oportunidad! 😣"
+  ];
+
+  let attempts = 0;
+
+  noBtn.addEventListener("mouseenter", () => {
+    // Movimiento MUCHO más grande para que sea imposible alcanzarlo
+    const x = Math.random() * 400 - 200; // rango amplio
+    const y = Math.random() * 300 - 150;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    // Cambiar mensaje
+    message.textContent =
+      noMessages[Math.min(attempts, noMessages.length - 1)];
+
+    attempts++;
+  });
+
+  yesBtn.addEventListener("click", () => {
+    card.innerHTML = `
+      <div class="heart">💖</div>
+      <h1>Jejejeje</h1>
+      <p class="final">Sabía que ibas a decir que sí 💕</p>
+      <h1>TE AMOOOO</h1>
+    `;
+  });
+</script>
+
+
+</body>
+</html>
