@@ -233,37 +233,44 @@
       `;
     } else {
       // 🖥️ En escritorio: mostrar frases alrededor con animación
-      frases.forEach((texto, i) => {
-        const div = document.createElement("div");
-        div.textContent = texto;
+const centerX = card.offsetWidth / 2;
+const centerY = card.offsetHeight / 2;
 
-        div.style.position = "absolute";
-        div.style.width = "260px";
-        div.style.padding = "12px";
-        div.style.background = "white";
-        div.style.borderRadius = "14px";
-        div.style.boxShadow = "0 10px 25px rgba(255,105,135,0.25)";
-        div.style.color = "#d6336c";
-        div.style.fontSize = "16px";
-        div.style.opacity = "0";
-        div.style.transition = "all 1s ease";
+const radius = 300; // distancia uniforme desde el centro
+const total = frases.length;
 
-        // posiciones alrededor
-        const angle = (i / frases.length) * Math.PI * 2;
-        const radius = 260;
+frases.forEach((texto, i) => {
+  const div = document.createElement("div");
+  div.textContent = texto;
 
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
+  div.style.position = "absolute";
+  div.style.width = "260px";
+  div.style.padding = "12px";
+  div.style.background = "white";
+  div.style.borderRadius = "14px";
+  div.style.boxShadow = "0 10px 25px rgba(255,105,135,0.25)";
+  div.style.color = "#d6336c";
+  div.style.fontSize = "16px";
+  div.style.opacity = "0";
+  div.style.transition = "all 1s ease";
 
-        div.style.transform = `translate(${x}px, ${y}px) scale(0.6)`;
+  // Ángulo perfectamente distribuido
+  const angle = (i / total) * Math.PI * 2;
 
-        card.appendChild(div);
+  // Coordenadas circulares
+  const x = centerX + Math.cos(angle) * radius - 130; // -130 para centrar el div
+  const y = centerY + Math.sin(angle) * radius - 60;  // -60 para centrar verticalmente
 
-        setTimeout(() => {
-          div.style.opacity = "1";
-          div.style.transform = `translate(${x}px, ${y}px) scale(1)`;
-        }, 100);
-      });
+  div.style.transform = `translate(${x}px, ${y}px) scale(0.6)`;
+
+  card.appendChild(div);
+
+  setTimeout(() => {
+    div.style.opacity = "1";
+    div.style.transform = `translate(${x}px, ${y}px) scale(1)`;
+  }, 100);
+});
+
     }
   }
 </script>
