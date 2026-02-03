@@ -130,26 +130,38 @@
 
   let attempts = 0;
 
-  noBtn.addEventListener("mouseenter", () => {
-    // Movimiento MUCHO más grande para que sea imposible alcanzarlo
-    const x = Math.random() * 400 - 200; // rango amplio
-    const y = Math.random() * 300 - 150;
+  // Distancia mínima en píxeles (≈ 2 cm)
+  const MIN_DISTANCE = 75;
+
+  document.addEventListener("mousemove", (e) => {
+    const rect = noBtn.getBoundingClientRect();
+    const btnX = rect.left + rect.width / 2;
+    const btnY = rect.top + rect.height / 2;
+
+    const dist = Math.hypot(e.clientX - btnX, e.clientY - btnY);
+
+    if (dist < MIN_DISTANCE) {
+      moveNoButton();
+    }
+  });
+
+  function moveNoButton() {
+    const x = Math.random() * 500 - 250; 
+    const y = Math.random() * 400 - 200;
 
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-    // Cambiar mensaje
     message.textContent =
       noMessages[Math.min(attempts, noMessages.length - 1)];
 
     attempts++;
-  });
+  }
 
   yesBtn.addEventListener("click", () => {
     card.innerHTML = `
       <div class="heart">💖</div>
-      <h1>Jejejeje</h1>
+      <h1>Jejejej 🎉</h1>
       <p class="final">Sabía que ibas a decir que sí 💕</p>
-      <h1>TE AMOOOO</h1>
     `;
   });
 </script>
